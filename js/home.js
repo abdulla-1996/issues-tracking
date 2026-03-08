@@ -213,3 +213,36 @@ document.getElementById("tabClosed").addEventListener("click", showClosedIssues)
 
 // running page load
 loadIssues();
+
+
+// step 6. getting issues and search on nav bar
+const searchIssues = async (searchText) => {
+
+    spinner.classList.remove("hidden");
+
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`);
+
+    const data = await res.json();
+
+    const issues = data.data;
+
+    displayIssues(issues);
+
+    spinner.classList.add("hidden");
+
+};
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", (e) => {
+
+    const text = e.target.value.trim();
+
+    if(text === ""){
+        displayIssues(allIssues);
+    }
+    else{
+        searchIssues(text);
+    }
+
+});

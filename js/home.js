@@ -1,4 +1,5 @@
-// store all issues and later filter all issues 
+
+//step.1 store all issues and later filter all issues 
 let allIssues = []; 
 
 const container = document.getElementById("issuesContainer");
@@ -6,7 +7,7 @@ const spinner = document.getElementById("loadingSpinner");
 const totalIssues = document.getElementById("totalIssues");
 
 
-//loading issues from API
+//step2.loading issues from API
 const loadIssues = async () => {
 
     // show spinner
@@ -28,7 +29,7 @@ const loadIssues = async () => {
 
 
 
-// display issues on UI
+//step3. display issues on UI
 const displayIssues = (issues) => {
 
     // clear container
@@ -47,9 +48,12 @@ const displayIssues = (issues) => {
 
         // dynamic status icon
         const statusIcon =
-    issue.status.toLowerCase() === "open"
-    ? "./assets/Open-Status.png"
-    : "./assets/Closed-Status.png";
+            issue.status.toLowerCase() === "open"
+            ? "./assets/Open-Status.png"
+            : "./assets/Closed-Status.png";
+
+        // dynamic priority color
+        const priorityStyle = getPriorityStyle(issue.priority);
 
         const card = document.createElement("div");
 
@@ -64,8 +68,8 @@ const displayIssues = (issues) => {
                 <img src="${statusIcon}" class="w-5 h-5">
             </div>
 
-            <span class="bg-red-100 text-red-500 px-3 py-1 rounded-full text-sm font-medium">
-                ${issue.priority}
+            <span class="${priorityStyle} px-3 py-1 rounded-full text-sm font-medium">
+                ${issue.priority.toUpperCase()}
             </span>
 
         </div>
@@ -138,9 +142,20 @@ const openModal = (issue) => {
     document.getElementById("issueModal").showModal();
 };
 
+//step.6 priority style function (dynamic colors)
+const getPriorityStyle = (priority) => {
+
+    const styles = {
+        high: "bg-red-100 text-red-500",
+        medium: "bg-yellow-100 text-yellow-600",
+        low: "bg-gray-200 text-gray-500"
+    };
+
+    return styles[priority.toLowerCase()];
+};
 
 
-//step3.style on active tab
+//step4a.style on active tab
 const setActiveTab = (activeId) => {
 
     const buttons = ["tabAll","tabOpen","tabClosed"];
@@ -164,7 +179,7 @@ const setActiveTab = (activeId) => {
 
 
 
-//step 3a. showing all issues on tab All and set active tabs
+//step 4b. showing all issues on tab All and set active tabs
 const showAllIssues = () => {
 
     displayIssues(allIssues);
@@ -175,7 +190,7 @@ const showAllIssues = () => {
 
 
 
-//step 3b. showing open issues on tab Open and set active tabs
+//step 4c. showing open issues on tab Open and set active tabs
 const showOpenIssues = () => {
 
     const openIssues =
@@ -189,7 +204,7 @@ const showOpenIssues = () => {
 
 
 
-// step 3c. showing closed issues on tab Closed and set active tabs
+// step 4d. showing closed issues on tab Closed and set active tabs
 const showClosedIssues = () => {
 
     const closedIssues =
@@ -215,7 +230,7 @@ document.getElementById("tabClosed").addEventListener("click", showClosedIssues)
 loadIssues();
 
 
-// step 6. getting issues and search on nav bar
+// step 7. getting issues and search on nav bar
 const searchIssues = async (searchText) => {
 
     spinner.classList.remove("hidden");

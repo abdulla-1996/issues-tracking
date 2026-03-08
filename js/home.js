@@ -6,7 +6,7 @@ const spinner = document.getElementById("loadingSpinner");
 const totalIssues = document.getElementById("totalIssues");
 
 
-//load issues from API
+//loading issues from API
 const loadIssues = async () => {
 
     // show spinner
@@ -28,7 +28,7 @@ const loadIssues = async () => {
 
 
 
-// display issues
+// display issues on UI
 const displayIssues = (issues) => {
 
     // clear container
@@ -109,5 +109,79 @@ const displayIssues = (issues) => {
 
 
 
-// run on page load
+
+
+
+//step3.style on active tab
+const setActiveTab = (activeId) => {
+
+    const buttons = ["tabAll","tabOpen","tabClosed"];
+
+    buttons.forEach(id => {
+
+        const btn = document.getElementById(id);
+
+        btn.classList.remove("bg-purple-600","text-white");
+
+        btn.classList.add("text-[#64748B]","border","border-gray-200");
+
+    });
+
+    const activeBtn = document.getElementById(activeId);
+
+    activeBtn.classList.add("bg-purple-600","text-white");
+
+    activeBtn.classList.remove("border","border-gray-200","text-[#64748B]");
+};
+
+
+
+//step 3a. showing all issues on tab All and set active tabs
+const showAllIssues = () => {
+
+    displayIssues(allIssues);
+
+    setActiveTab("tabAll");
+
+};
+
+
+
+//step 3b. showing open issues on tab Open and set active tabs
+const showOpenIssues = () => {
+
+    const openIssues =
+        allIssues.filter(issue => issue.status === "open");
+
+    displayIssues(openIssues);
+
+    setActiveTab("tabOpen");
+
+};
+
+
+
+// step 3c. showing closed issues on tab Closed and set active tabs
+const showClosedIssues = () => {
+
+    const closedIssues =
+        allIssues.filter(issue => issue.status === "closed");
+
+    displayIssues(closedIssues);
+
+    setActiveTab("tabClosed");
+
+};
+
+
+
+//step 4. adding event and showing specific issues by clicking each tab
+document.getElementById("tabAll").addEventListener("click", showAllIssues);
+
+document.getElementById("tabOpen").addEventListener("click", showOpenIssues);
+
+document.getElementById("tabClosed").addEventListener("click", showClosedIssues);
+
+
+// running page load
 loadIssues();

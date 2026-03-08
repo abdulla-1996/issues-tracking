@@ -41,7 +41,7 @@
                     id="searchInput" type="text" placeholder="Search issues..." class="border border-gray-400 px-3 py-2 rounded-md w-full"
                     />
 
-                    <button class="bg-blue-700 font-semibold text-white px-4 py-2 rounded-md whitespace-nowrap">
+                    <button class="bg-blue-700 hover:bg-blue-600 font-semibold text-white px-4 py-2 rounded-md whitespace-nowrap">
                     <i class="fa-solid fa-plus"></i> New Issue
                     </button>
 
@@ -120,57 +120,67 @@
                     <!-- Cards Container -->
         <div id="issuesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            <!-- <div class="bg-white rounded-xl shadow border-t-4 p-5">
-
-                <!-- Top Card Icon -->
-                <!-- <div class="flex justify-between items-center mb-3">
-
-                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                        <img src="./assets/Aperture.png" class="w-5 h-5">
-                    </div>
-
-                    <span class="bg-red-100 text-red-500 px-3 py-1 rounded-full text-sm font-medium">
-                        HIGH
-                    </span>
-
-                </div> -->
-
-                <!-- Title Card -->
-                <!-- <h3 class="font-semibold text-gray-800 text-lg mb-2">
-                    Fix Navigation Menu On Mobile Devices
-                </h3> -->
-
-                <!-- Description Card -->
-                <!-- <p class="text-gray-500 text-sm mb-4">
-                    The navigation menu doesn't collapse properly on mobile devices...
-                </p> -->
-
-                <!-- Labels -->
-                <!-- <div class="flex gap-2 mb-4">
-
-                    <span class="border border-red-300 text-red-500 px-3 py-1 rounded-full text-xs">
-                        BUG
-                    </span>
-
-                    <span class="border border-yellow-400 text-yellow-600 px-3 py-1 rounded-full text-xs">
-                        HELP WANTED
-                    </span>
-
-                </div> -->
-
-                <!-- Footer -->
-                <!-- <div class="border-t pt-3 text-sm text-gray-500">
-
-                    <p>#1 by john_doe</p>
-                    <p>1/15/2024</p>
-
-                </div> -->
-
-           <!-- </div>  -->
-
         </div>
 
     </section>
+                <!-- modal -->
+    <dialog id="issueModal" class="modal">
+
+  <div class="modal-box max-w-xl p-6">
+
+                <!-- Title -->
+    <h3 id="modalTitle" class="text-2xl font-semibold text-gray-800 mb-3"></h3>
+
+              <!--modal Status Row -->
+    <div class="flex items-center gap-3 text-sm mb-4">
+
+      <span id="modalStatus"
+      class="px-3 py-1 rounded-full text-white bg-green-500 text-xs"></span>
+
+      <span class="text-gray-400">•</span>
+
+      <span id="modalAuthor" class="text-gray-600"></span>
+
+      <span class="text-gray-400">•</span>
+
+      <span id="modalDate" class="text-gray-600"></span>
+
+    </div>
+
+             <!-- Labels on Modal -->
+    <div id="modalLabels" class="flex gap-2 mb-4"></div>
+
+             <!--MOdal Description -->
+    <p id="modalDescription" class="text-gray-600 mb-6"></p>
+
+           <!-- Info Box -->
+    <div class="bg-gray-100 rounded-lg p-4 flex justify-start gap-50 items-center mb-6">
+
+        <div>
+            <p class="text-sm text-gray-500">Assignee:</p>
+            <p id="modalAssignee" class="font-semibold text-gray-700"></p>
+        </div>
+
+        <div>
+            <p class="text-sm text-gray-500">Priority:</p>
+            <span id="modalPriority"
+            class="px-3 py-1 rounded-full text-xs text-white bg-red-500"></span>
+        </div>
+
+    </div>
+
+    <!-- Close Button -->
+    <div class="flex justify-end">
+        <form method="dialog">
+            <button class="bg-blue-700  text-white px-5 py-2 rounded-md hover:bg-blue-600">
+                Close
+            </button>
+        </form>
+    </div>
+
+  </div>
+
+</dialog>
 
     <script src="./js/home.js"></script>
 </body>

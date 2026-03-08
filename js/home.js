@@ -95,7 +95,7 @@ const displayIssues = (issues) => {
         </div>
         `;
 
-        // modal open
+        // modal open 
         card.addEventListener("click", () => {
             openModal(issue);
         });
@@ -107,8 +107,36 @@ const displayIssues = (issues) => {
 };
 
 
+//step 5. modal function
+const openModal = (issue) => {
 
+    document.getElementById("modalTitle").innerText = issue.title;
 
+    document.getElementById("modalDescription").innerText = issue.description;
+
+    document.getElementById("modalStatus").innerText =
+        issue.status === "open" ? "Opened" : "Closed";
+
+    document.getElementById("modalAuthor").innerText =
+        "Opened by " + issue.author;
+
+    document.getElementById("modalDate").innerText = issue.createdAt;
+
+    document.getElementById("modalPriority").innerText = issue.priority;
+
+    document.getElementById("modalAssignee").innerText = issue.author;
+
+    // labels
+    const labelsContainer = document.getElementById("modalLabels");
+
+    labelsContainer.innerHTML = issue.labels.map(label => `
+        <span class="border border-yellow-400 text-yellow-600 px-3 py-1 rounded-full text-xs">
+            ${label}
+        </span>
+    `).join("");
+
+    document.getElementById("issueModal").showModal();
+};
 
 
 
